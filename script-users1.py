@@ -1,6 +1,7 @@
 import json
 import subprocess
 import datetime
+import socket
 
 date_format = "%Y-%m-%d"  # فرمت تاریخ
 today = str(datetime.date.today().strftime(date_format))
@@ -46,8 +47,11 @@ def main():
         user_data[user] = {'password_expiry': password_expiry, 
                            'last_password_change': last_password_change, 
                            'difference': difference,}
+    hostname = socket.gethostname()
+    srv_date = {hostname: {'Date': today,
+                'Users': user_data,}}
     with open('user_data.json', 'w') as f:
-        json.dump(user_data, f)
+        json.dump(srv_date, f)
 
 if __name__ == '__main__':
     main()
