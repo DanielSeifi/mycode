@@ -48,8 +48,8 @@ def main():
                            'last_password_change': last_password_change, 
                            'difference': difference,}
     hostname = socket.gethostname()
-    srv_date = {hostname: {'Date': today,
-                'Users': user_data,}}
+    srv_date = {'HostName': hostname,'Date': today,
+                'Users': user_data,}
     with open('user_data.json', 'w') as f:
         json.dump(srv_date, f)
 
